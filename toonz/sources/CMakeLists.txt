@@ -168,6 +168,9 @@ else()
     set(SUPERLU_LIB ${SUPERLU_LIBRARY})
     message("SuperLU:" ${SUPERLU_INCLUDE_DIR})
 
+    # Mono を先に見つけてしまうと Headers の依存関係が制御不能になるので、これを避ける.
+    # check only brew and thirdparty/ because find_package() will find Mono if it's present.
+    # Mono.framework/Headers has many header files (also tiffio.h) and makes dependency un-controlable. Exclude it.
     find_package(JPEG REQUIRED)
 
     # the libraries have .pc
